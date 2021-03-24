@@ -3,6 +3,8 @@ const movies = require('./data/movies');
 
 const app = express();
 
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
   res.send('Welcome to the Movie API');
 });
