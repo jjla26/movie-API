@@ -1,0 +1,26 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "## Want to experiment with this app? ###### Clone this repository using: - git clone https://github.com/jjla26/Pokedex.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjla26/movie-API.git"
+  },
+  "author": "Julio Lopez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjla26/movie-API/issues"
+  },
+  "homepage": "https://github.com/jjla26/movie-API#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0"
+  }
+}
