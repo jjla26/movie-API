@@ -7,6 +7,12 @@ const app = express();
 app.use(express.static('public'));
 app.use(morgan('common'));
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 // Route for the root url
 app.get('/', (req, res) => {
   res.send('Welcome to the Movie API');
