@@ -24,6 +24,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "eslint": "^7.22.0"
+    "eslint": "^7.22.0",
+    "eslint-config-google": "^0.14.0"
   }
 }
