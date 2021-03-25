@@ -5,9 +5,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie API - Documentation</title>
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
     <h1>Movie API Documentation</h1>
+
+    <h2>API ENDPOINTS</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Request</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Request Body Data Format</th>
+                <th>Response Body Data Format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Get All the Movies</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object holding data about all the movies</td>
+            </tr>
+            <tr>
+                <td>Get a movie by Title</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object with details of one movie (Genre, description, director, image URL)</td>
+            </tr>
+            <tr>
+                <td>Get genre's information of one movie</td>
+                <td>/movies/:title/genre</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object with the genre's information of one Movie</td>
+            </tr>
+            <tr>
+                <td>Get director's information of one movie</td>
+                <td>/movies/:title/director</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>A JSON object with the director information of one Movie</td>
+            </tr>
+            <tr>
+                <td>Register an user</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>A JSON holding the data about one user to be added. Example: 
+                        {
+                            name: "Julio Lopez",
+                            email: "example@gmail.com"
+                            password: "12345678
+                            password_confirmation: "12345678"
+                        }
+                </td>
+                <td>A JSON holding the added user's data (including ID and no passwords). Example:
+                    {
+                        id: "2"
+                        name: "Julio Lopez",
+                        email: "example@gmail.com"
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Update user's profile information</td>
+                <td>/users</td>
+                <td>PUT</td>
+                <td>A JSON holding the information to be changed. Example:
+                    {
+                        name: "Julio Neuman",
+                    }
+                </td>
+                <td>A JSON holding the user's data changed. Example
+                    {
+                        id: "2"
+                        name: "Julio Neuman",
+                        email: "example@gmail.com"
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Add movie to user's favorites</td>
+                <td>/users/:id/favorites/:movieid</td>
+                <td>PUT</td>
+                <td>None</td>
+                <td>A message saying the movie was successfully added</td>
+            </tr>
+            <tr>
+                <td>Delete movie from user's favorites</td>
+                <td>/users/:id/favorites/:movieid</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>A message saying the movie was successfully removed</td>
+            </tr>
+            <tr>
+                <td>Remove a user</td>
+                <td>/users/:id</td>
+                <td>Delete</td>
+                <td>None</td>
+                <td>A message saying the user was successfully removed</td>
+            </tr>
+        </tbody>
+    </table>
 
     <h2>Objective</h2>
     <p>To build the server-side component of a “movies” web application. The web

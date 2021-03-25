@@ -4,10 +4,19 @@
 
 ## API ENDPOINTS 
 
-| ENDPOINT        | METHOD           | Description            |
-| --------------- |-----------       | ---------------------- |
-| /               | GET              | Home Route             |
-| /movies         | GET              | Return all the movies  |
+| REQUEST                 | ENDPOINT                  | METHOD           | REQUEST BODY           | RESPONSE BODY                       |
+| ----------------------- | ------------------------- |-----------       | ---------------------- | ----------------------------------- |
+| Home Route              | /                         | GET              | None                   | HTML welcome message                |
+| Documentation Route     | /documentation.html       | GET              | None                   | HTML documentation info             |
+| Get all the movies      | /movies                   | GET              | None                   | JSON holding all the movies         |
+| Get movie by title      | /movies/:title            | GET              | None                   | JSON with a movie details           |
+| Get genre of movie      | /movies/:title/genre      | GET              | None                   | JSON with the genre of one movie    |
+| Get director of movie   | /movies/:title/director   | GET              | None                   | JSON with the director of one movie |
+| Register user           | /users                    | POST             | JSON with User's info  | JSON with user's details            |
+| Update user's profile   | /users                    | PUT              | Json with update info  | JSON with user's details            |
+| Remove user             | /users                    | DELETE           | None                   | Success Message                     |
+| Add movie to favorite   | /users/:id/movies/:movieid| PUT              | None                   | Success Message                     |
+| Remove movie of favorite| /users/:id/movies/:movieid| DELETE           | None                   | Success Message                     |
 
 ## Want to experiment with this app?
 ###### Clone this repository using: - git clone https://github.com/jjla26/Pokedex.git
