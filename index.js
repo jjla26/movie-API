@@ -9,18 +9,17 @@ app.use(morgan('common'));
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.log(err.stack);
   res.status(500).send('Something broke!');
 });
 
 // Route for the root url
 app.get('/', (req, res) => {
-  res.send('Welcome to the Movie API');
+  return res.json('Welcome to the Movie API');
 });
 
 // Route for movies pathname returns movies data
 app.get('/movies', (req, res) => {
-  res.json(movies);
+  return res.json(movies);
 });
 
 // Server listener
