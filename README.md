@@ -1,5 +1,14 @@
 # movie-API
 
+###### This API contains information about movies created by users
+
+## API ENDPOINTS 
+
+| ENDPOINT        | METHOD           | Description            |
+| --------------- |-----------       | ---------------------- |
+| /               | GET              | Home Route             |
+| /movies         | GET              | Return all the movies  |
+
 ## Want to experiment with this app?
 ###### Clone this repository using: - git clone https://github.com/jjla26/Pokedex.git
 
