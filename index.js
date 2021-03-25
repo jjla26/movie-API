@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const movies = require('./data/movies');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 
 app.use(express.static('public'));
@@ -22,7 +24,9 @@ app.get('/movies', (req, res) => {
   return res.json(movies);
 });
 
+const port = process.env.PORT || 8080;
+
 // Server listener
-app.listen(8080, () => {
-  console.log('Server running on port 8080');
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
