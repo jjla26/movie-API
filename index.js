@@ -26,7 +26,8 @@ app.get('/movies', (req, res) => {
 
 // Route to get the movies by title
 app.get('/movies/:title', (req, res) => {
-  return res.json({message: "title"});
+  return res.json(movies.find((movie) =>
+    movie.name === req.params.title));
 });
 
 // Route to get genre of a movie
