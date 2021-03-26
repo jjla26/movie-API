@@ -15,7 +15,7 @@
 | Register user           | /users                    | POST             | JSON with User's info  | JSON with user's details            |
 | Update user's profile   | /users                    | PUT              | Json with update info  | JSON with user's details            |
 | Remove user             | /users                    | DELETE           | None                   | Success Message                     |
-| Add movie to favorite   | /users/:id/movies/:movieid| PUT              | None                   | Success Message                     |
+| Add movie to favorite   | /users/:id/movies/:movieid| POST             | None                   | Success Message                     |
 | Remove movie of favorite| /users/:id/movies/:movieid| DELETE           | None                   | Success Message                     |
 
 ## Want to experiment with this app?
