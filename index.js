@@ -24,6 +24,46 @@ app.get('/movies', (req, res) => {
   return res.json(movies);
 });
 
+// Route to get the movies by title
+app.get('/movies/:title', (req, res) => {
+  return res.json({message: "title"});
+});
+
+// Route to get genre of a movie
+app.get('/movies/:title/genre', (req, res) => {
+  return res.json({message: 'genre'});
+});
+
+// Route to get director of a movie
+app.get('/movies/:title/director', (req, res) => {
+  return res.json({message: 'director'});
+});
+
+// Route to create an user
+app.post('/users', (req, res) => {
+  return res.json({message: 'user created'});
+});
+
+// Route to edit an user
+app.put('/users', (req, res) => {
+  return res.json({message: 'user updated'});
+});
+
+// Route remove an user
+app.delete('/users/:id', (req, res) => {
+  return res.json({message: 'user removed'});
+});
+
+// Route to add a movie to favorites
+app.post('/users/:id/favorites/:movieid', (req, res) => {
+  return res.json({message: 'movie added to favorites'});
+});
+
+// Route to removie a movie from favorites
+app.delete('/users/:id/favorites/:movieid', (req, res) => {
+  return res.json({message: 'movie removed from favorites'});
+});
+
 const port = process.env.PORT || 8080;
 
 // Server listener
