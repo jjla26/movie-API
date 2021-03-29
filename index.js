@@ -1,12 +1,15 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const movies = require('./routes/movies');
 const users = require('./routes/users');
 const dotenv = require('dotenv');
 
 dotenv.config();
+
 const app = express();
 
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
 
