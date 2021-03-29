@@ -5,14 +5,26 @@ const users = require('../data/users');
 
 // Route to get all the users
 router.get('/', (req, res) => {
-  return res.status(200)
-      .json({data: users, total: users.length,
-        message: 'Users retrieved Succesfully'});
+  return res.status(200).json({
+    data: users,
+    total: users.length,
+    message: 'Users retrieved Succesfully',
+  });
 });
 
 // Route to create an user
 router.post('/', (req, res) => {
-  return res.json({message: 'user created'});
+  const newUser = req.body;
+  if (!newUser.name) {
+    const message = 'User\'s name Missing';
+    return res.status(400).json({message: message});
+  } else {
+    users.push(newUser);
+    return res.status(200).json({
+      data: newUser,
+      message: 'User added succesfully',
+    });
+  }
 });
 
 // Route to edit an user
