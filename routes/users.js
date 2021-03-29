@@ -15,8 +15,11 @@ router.get('/', (req, res) => {
 // Route to create an user
 router.post('/', (req, res) => {
   const newUser = req.body;
-  if (!newUser.name) {
+  if (!newUser.name ) {
     const message = 'User\'s name Missing';
+    return res.status(400).json({message: message});
+  } else if (!newUser.email ) {
+    const message = 'User\'s email Missing';
     return res.status(400).json({message: message});
   } else {
     users.push(newUser);
