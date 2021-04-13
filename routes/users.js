@@ -79,7 +79,7 @@ router.delete('/:id', (req, res) => {
 // Route to add a movie to favorites
 router.post('/:Username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {
-    $push: {FavoriteMovies: req.params.MovieID}},
+    $addToSet: {FavoriteMovies: req.params.MovieID}},
   {new: true})
       .then((updatedUser) => res.status(200).json({
         data: updatedUser,
