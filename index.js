@@ -1,11 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const movies = require('./routes/movies');
 const users = require('./routes/users');
 const dotenv = require('dotenv');
 
 dotenv.config();
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const app = express();
 
