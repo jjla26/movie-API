@@ -9,7 +9,10 @@ const Users = Models.User;
 // Get a user by Username
 router.get('/:Username', (req, res) => {
   Users.findOne({Username: req.params.Username})
-      .then((user) => res.json(user))
+      .then((user) => res.json({
+        data: user,
+        message: 'User has been retrieved',
+      }))
       .catch((error) => res.status(400).json(error));
 });
 
@@ -38,7 +41,10 @@ router.post('/', (req, res) => {
         Email: req.body.Email,
         Birthday: req.body.Birthday,
       })
-          .then((user) => res.status(201).json(user))
+          .then((user) => res.status(201).json({
+            data: user,
+            message: 'User has been created',
+          }))
           .catch((error) => {
             res.status(400).json(error);
           });
@@ -58,7 +64,10 @@ router.put('/:Username', (req, res) => {
       },
   },
   {new: true})
-      .then((updatedUser) => res.status(200).json(updatedUser))
+      .then((updatedUser) => res.status(200).json({
+        data: updatedUser,
+        message: 'User has been updated',
+      }))
       .catch((error) => res.status(400).json(error));
 });
 
@@ -72,7 +81,10 @@ router.post('/:Username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {
     $push: {FavoriteMovies: req.params.MovieID}},
   {new: true})
-      .then((updatedUser) => res.status(200).json(updatedUser))
+      .then((updatedUser) => res.status(200).json({
+        data: updatedUser,
+        message: 'Movie has been added to favorites',
+      }))
       .catch((error) => res.status(400).json(error));
 });
 
