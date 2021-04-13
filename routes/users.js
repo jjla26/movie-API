@@ -89,8 +89,15 @@ router.post('/:Username/favorites/:MovieID', (req, res) => {
 });
 
 // Route to removie a movie from favorites
-router.delete('/:id/favorites/:movieid', (req, res) => {
-  return res.json({message: 'movie removed from favorites'});
+router.delete('/:Username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
+    $pull: {FavoriteMovies: req.params.MovieID}},
+  {new: true})
+      .then((updatedUser) => res.status(200).json({
+        data: updatedUser,
+        message: 'Movie has been added to favorites',
+      }))
+      .catch((error) => res.status(400).json(error));
 });
 
 module.exports = router;
