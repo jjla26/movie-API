@@ -72,8 +72,18 @@ router.put('/:Username', (req, res) => {
 });
 
 // Route remove an user
-router.delete('/:id', (req, res) => {
-  return res.json({message: 'user removed'});
+router.delete('/:Username', (req, res) => {
+  Users.findOneAndRemove({Username: req.params.Username})
+      .then((user) => {
+        if (!user) {
+          return res.status(400)
+              .json({message: `${req.params.Username} was not found`});
+        } else {
+          return res.status(200)
+              .json({message: `${req.params.Username} was deleted`});
+        }
+      })
+      .catch((error) => res.status(400).json(error));
 });
 
 // Route to add a movie to favorites
@@ -95,7 +105,7 @@ router.delete('/:Username/favorites/:MovieID', (req, res) => {
   {new: true})
       .then((updatedUser) => res.status(200).json({
         data: updatedUser,
-        message: 'Movie has been added to favorites',
+        message: 'Movie has been removed to favorites',
       }))
       .catch((error) => res.status(400).json(error));
 });
