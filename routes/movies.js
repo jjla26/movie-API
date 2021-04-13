@@ -1,17 +1,22 @@
 const express = require('express');
 // eslint-disable-next-line
 const router = express.Router();
-const movies = require('../data/movies');
+// const movies = require('../data/movies');
+const Models = require('../models/movies');
+
+const Movies = Models.Movie;
 
 // Route for movies pathname returns movies data
 router.get('/', (req, res) => {
-  return res
-      .status(200)
-      .json({
-        data: movies,
-        total: movies.length,
-        message: 'Movies retrieved Succesfully',
-      });
+  Movies.find()
+      .then((movies) => {
+        return res.status(200).json({
+          data: movies,
+          total: movies.length,
+          message: 'Movies retrieved Succesfully',
+        });
+      })
+      .catch((error) => res.status(400).json(error));
 });
 
 // Route to get the movies by title
