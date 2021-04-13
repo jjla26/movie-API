@@ -37,7 +37,7 @@ router.get('/:Title', (req, res) => {
       .catch((error) => res.status(400).json(error));
 });
 
-// Route to get genre of a movie
+// Route genre by name
 router.get('/:Name/genre', (req, res) => {
   Movies.findOne({'Genre.Name': req.params.Name})
       .then((movie) => {
@@ -55,9 +55,22 @@ router.get('/:Name/genre', (req, res) => {
       .catch((error) => res.status(400).json(error));
 });
 
-// Route to get director of a movie
-router.get('/:title/director', (req, res) => {
-  return res.json({message: 'director'});
+// Route director by name
+router.get('/:Name/director', (req, res) => {
+  Movies.findOne({'Director.Name': req.params.Name})
+      .then((movie) => {
+        if (!movie) {
+          return res.status(400).json({
+            message: `${req.params.Name} was not found`,
+          });
+        } else {
+          return res.status(200).json({
+            data: movie.Director,
+            message: 'Director has been retrieved',
+          });
+        }
+      })
+      .catch((error) => res.status(400).json(error));
 });
 
 module.exports = router;
