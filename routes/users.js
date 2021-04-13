@@ -6,9 +6,9 @@ const Models = require('../models/users');
 
 const Users = Models.User;
 
-// Get a user by username
-router.get('/:username', (req, res) => {
-  Users.findOne({Username: req.params.username})
+// Get a user by Username
+router.get('/:Username', (req, res) => {
+  Users.findOne({Username: req.params.Username})
       .then((user) => res.json(user))
       .catch((error) => res.status(400).json(error));
 });
@@ -47,8 +47,19 @@ router.post('/', (req, res) => {
 });
 
 // Route to edit an user
-router.put('/', (req, res) => {
-  return res.json({message: 'user updated'});
+router.put('/:Username', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
+    $set:
+      {
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
+      },
+  },
+  {new: true})
+      .then((updatedUser) => res.json(updatedUser))
+      .catch((error) => res.status(400).json(error));
 });
 
 // Route remove an user
