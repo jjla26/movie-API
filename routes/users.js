@@ -9,10 +9,18 @@ const Users = Models.User;
 // Get a user by Username
 router.get('/:Username', (req, res) => {
   Users.findOne({Username: req.params.Username})
-      .then((user) => res.json({
-        data: user,
-        message: 'User has been retrieved',
-      }))
+      .then((user) => {
+        if (!user) {
+          return res.status(400).json({
+            message: `${req.params.Username} was not found`,
+          });
+        } else {
+          return res.status(200).json({
+            data: user,
+            message: 'User has been retrieved',
+          });
+        }
+      })
       .catch((error) => res.status(400).json(error));
 });
 
@@ -64,10 +72,18 @@ router.put('/:Username', (req, res) => {
       },
   },
   {new: true})
-      .then((updatedUser) => res.status(200).json({
-        data: updatedUser,
-        message: 'User has been updated',
-      }))
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(400).json({
+            message: 'Update was not successful',
+          });
+        } else {
+          return res.status(200).json({
+            data: updatedUser,
+            message: 'User has been updated',
+          });
+        }
+      })
       .catch((error) => res.status(400).json(error));
 });
 
@@ -91,22 +107,38 @@ router.post('/:Username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {
     $addToSet: {FavoriteMovies: req.params.MovieID}},
   {new: true})
-      .then((updatedUser) => res.status(200).json({
-        data: updatedUser,
-        message: 'Movie has been added to favorites',
-      }))
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(400).json({
+            message: 'Update was not successful',
+          });
+        } else {
+          return res.status(200).json({
+            data: updatedUser,
+            message: 'Movie has been added to favorites',
+          });
+        }
+      })
       .catch((error) => res.status(400).json(error));
 });
 
-// Route to removie a movie from favorites
+// Route to remove a movie from favorites
 router.delete('/:Username/favorites/:MovieID', (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {
     $pull: {FavoriteMovies: req.params.MovieID}},
   {new: true})
-      .then((updatedUser) => res.status(200).json({
-        data: updatedUser,
-        message: 'Movie has been removed to favorites',
-      }))
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return res.status(400).json({
+            message: 'Update was not successful',
+          });
+        } else {
+          return res.status(200).json({
+            data: updatedUser,
+            message: 'Movie has been removed to favorites',
+          });
+        }
+      })
       .catch((error) => res.status(400).json(error));
 });
 
