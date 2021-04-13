@@ -58,7 +58,7 @@ router.put('/:Username', (req, res) => {
       },
   },
   {new: true})
-      .then((updatedUser) => res.json(updatedUser))
+      .then((updatedUser) => res.status(200).json(updatedUser))
       .catch((error) => res.status(400).json(error));
 });
 
@@ -68,8 +68,12 @@ router.delete('/:id', (req, res) => {
 });
 
 // Route to add a movie to favorites
-router.post('/:id/favorites/:movieid', (req, res) => {
-  return res.json({message: 'movie added to favorites'});
+router.post('/:Username/favorites/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
+    $push: {FavoriteMovies: req.params.MovieID}},
+  {new: true})
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((error) => res.status(400).json(error));
 });
 
 // Route to removie a movie from favorites
