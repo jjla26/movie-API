@@ -13,10 +13,13 @@
 | Get genre by name       | /movies/:name/genre       | GET              | None                   | JSON with the genre of one movie    |
 | Get director by name    | /movies/:name/director    | GET              | None                   | JSON with the director of one movie |
 | Register user           | /users                    | POST             | JSON with User's info  | JSON with user's details            |
-| Update user's profile   | /users                    | PUT              | Json with update info  | JSON with user's details            |
-| Remove user             | /users                    | DELETE           | None                   | Success Message                     |
+| Update user's profile   | /users                    | PUT              | JSON with update info  | JSON with user's details            |
+| Remove user             | /users/:username          | DELETE           | None                   | Success Message                     |
 | Add movie to favorite   | /users/:username/movies/:movieid| POST             | None                   | Success Message                     |
-| Remove movie of favorite| /users/:username/movies/:movieid| DELETE           | None                   | Success Message                     |
+| Remove movie from favorite| /users/:username/movies/:movieid| DELETE           | None                   | Success Message                     |
+| Get all the users       | /users                     | GET              | None                   | JSON with all the users |
+| Get user by name        | /users/:username           | GET              | None                   | JSON with the user requested |
+
 
 ## Want to experiment with this app?
 ###### Clone this repository using: - git clone https://github.com/jjla26/Pokedex.git
