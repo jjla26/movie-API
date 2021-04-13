@@ -38,12 +38,12 @@ router.get('/:Title', (req, res) => {
 });
 
 // Route to get genre of a movie
-router.get('/:Title/genre', (req, res) => {
-  Movies.findOne({Title: req.params.Title})
+router.get('/:Name/genre', (req, res) => {
+  Movies.findOne({'Genre.Name': req.params.Name})
       .then((movie) => {
         if (!movie) {
           return res.status(400).json({
-            message: `${req.params.Title} was not found`,
+            message: `${req.params.Name} was not found`,
           });
         } else {
           return res.status(200).json({
