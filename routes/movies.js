@@ -20,8 +20,21 @@ router.get('/', (req, res) => {
 });
 
 // Route to get the movies by title
-router.get('/:title', (req, res) => {
-  return res.json(movies.find((movie) => movie.name === req.params.title));
+router.get('/:Title', (req, res) => {
+  Movies.findOne({Title: req.params.Title})
+      .then((movie) => {
+        if (!movie) {
+          return res.status(400).json({
+            message: `${req.params.Title} was not found`,
+          });
+        } else {
+          return res.status(200).json({
+            data: movie,
+            message: 'Movie has been retrieved',
+          });
+        }
+      })
+      .catch((error) => res.status(400).json(error));
 });
 
 // Route to get genre of a movie
