@@ -42,79 +42,167 @@
                 <td>/movies</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object holding data about all the movies</td>
+                <td>
+                    A JSON object holding data about all the movies
+                </td>
             </tr>
             <tr>
                 <td>Get a movie by Title</td>
                 <td>/movies/:title</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object with details of one movie (Genre, description, director, image URL)</td>
+                <td>
+                    A JSON object with details of one movie (Genre, description, director, image URL)
+                </td>
             </tr>
             <tr>
-                <td>Get genre's information of one movie</td>
-                <td>/movies/:title/genre</td>
+                <td>Get genre by name</td>
+                <td>/movies/:name/genre</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object with the genre's information of one Movie</td>
+                <td>
+                    A JSON object with the genre's information of one Movie
+                </td>
             </tr>
             <tr>
-                <td>Get director's information of one movie</td>
-                <td>/movies/:title/director</td>
+                <td>Get director by name</td>
+                <td>/movies/:name/director</td>
                 <td>GET</td>
                 <td>None</td>
-                <td>A JSON object with the director information of one Movie</td>
+                <td>
+                    A JSON object with the director information of one Movie
+                </td>
+            </tr>
+            <tr>
+                <td>Get all the users</td>
+                <td>/users</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                    A JSON object with all the users
+                </td>
+            </tr>
+            <tr>
+                <td>Get user by name</td>
+                <td>/users/:username</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>
+                    A JSON object with the user requested
+                </td>
+            </tr>
+            <tr>
+                <td>Delete user by name</td>
+                <td>/users/:username</td>
+                <td>DELETE</td>
+                <td>None</td>
+                <td>
+                    A JSON with a successful message
+                </td>
             </tr>
             <tr>
                 <td>Register an user</td>
                 <td>/users</td>
                 <td>POST</td>
-                <td>A JSON holding the data about one user to be added. Example: 
-                        {
-                            name: "Julio Lopez",
-                            email: "example@gmail.com"
-                            password: "12345678
-                            password_confirmation: "12345678"
-                        }
-                </td>
-                <td>A JSON holding the added user's data (including ID and no passwords). Example:
+                <td>
+                    A JSON holding the data about one user to be added. Example:
                     {
-                        id: "2"
-                        name: "Julio Lopez",
-                        email: "example@gmail.com"
+                        Username: String,
+                        Password: String,,
+                        Email: type: String,
+                        Birthday: Date, (not required)
+                        FavoriteMovies: [], (not required)
+                    } 
+                </td>
+                <td>
+                    A JSON holding the added user's data (including ID and no passwords). Example:
+                    {
+                        "data": {
+                            "FavoriteMovies": [
+                                "606ed28b3973670f5af1bd62"
+                            ],
+                            "_id": "607569b49ba782386e4c26fd",
+                            "Username": "Julio",
+                            "Email": null,
+                            "__v": 0,
+                            "Birthday": null
+                        },
+                        "message": "User has been updated"
                     }
                 </td>
             </tr>
             <tr>
                 <td>Update user's profile information</td>
-                <td>/users</td>
+                <td>/users/:username</td>
                 <td>PUT</td>
-                <td>A JSON holding the information to be changed. Example:
+                <td>
+                    A JSON holding the information to be changed. Example:
                     {
-                        name: "Julio Neuman",
+                        Username: String,
+                        Email: type: String,
+                        Birthday: Date, (not required)
+                        FavoriteMovies: [], (not required)
                     }
                 </td>
-                <td>A JSON holding the user's data changed. Example
+                <td>
+                    A JSON holding the user's data changed. Example
                     {
-                        id: "2"
-                        name: "Julio Neuman",
-                        email: "example@gmail.com"
+                        "data": {
+                            "FavoriteMovies": [
+                                "606ed28b3973670f5af1bd62"
+                            ],
+                            "_id": "607569b49ba782386e4c26fd",
+                            "Username": "Julio",
+                            "Password": "123123123",
+                            "Email": null,
+                            "__v": 0,
+                            "Birthday": null
+                        },
+                        "message": "User has been updated"
                     }
                 </td>
             </tr>
             <tr>
                 <td>Add movie to user's favorites</td>
-                <td>/users/:id/favorites/:movieid</td>
+                <td>/users/:username/favorites/:movieid</td>
                 <td>POST</td>
                 <td>None</td>
-                <td>A message saying the movie was successfully added</td>
+                <td>
+                    The full user with the movies array:
+                    {
+                        "data": {
+                            "FavoriteMovies": [
+                                "606ed28b3973670f5af1bd62"
+                            ],
+                            "_id": "607569b49ba782386e4c26fd",
+                            "Username": "Julio",
+                            "Password": "123456",
+                            "Email": "julioj.lopeza@gmail.com",
+                            "__v": 0
+                        },
+                        "message": "Movie has been added to favorites"
+                    }
+                </td>
             </tr>
             <tr>
                 <td>Delete movie from user's favorites</td>
-                <td>/users/:id/favorites/:movieid</td>
+                <td>/users/:username/favorites/:movieid</td>
                 <td>DELETE</td>
                 <td>None</td>
-                <td>A message saying the movie was successfully removed</td>
+                <td>
+                    The full user without the movie removed:
+                    {
+                        "data": {
+                            "FavoriteMovies": [],
+                            "_id": "607569b49ba782386e4c26fd",
+                            "Username": "Julio",
+                            "Password": "123456",
+                            "Email": "julioj.lopeza@gmail.com",
+                            "__v": 0
+                        },
+                        "message": "Movie has been added to favorites"
+                    }
+                </td>
             </tr>
             <tr>
                 <td>Remove a user</td>
