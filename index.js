@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const movies = require('./routes/movies');
 const users = require('./routes/users');
 const dotenv = require('dotenv');
+const auth = require('./routes/auth');
+require('./auth/passport');
 
 dotenv.config();
 
@@ -27,6 +29,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes
+app.use('/login', auth);
 app.use('/movies', movies);
 app.use('/users', users);
 
