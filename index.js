@@ -23,11 +23,6 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-// Route for the root url
-app.get('/', (req, res) => {
-  return res.json('Welcome to the Movie API');
-});
-
 // Routes
 app.use('/login', auth);
 app.use('/movies', movies);
