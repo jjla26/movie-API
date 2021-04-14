@@ -1,9 +1,8 @@
 const express = require('express');
-// eslint-disable-next-line
-const router = express.Router({mergeParams: true});
-// const users = require('../data/users');
 const Models = require('../models/users');
 
+// eslint-disable-next-line
+const router = express.Router();
 const Users = Models.User;
 
 // Get a user by Username
@@ -11,7 +10,7 @@ router.get('/:Username', (req, res) => {
   Users.findOne({Username: req.params.Username})
       .then((user) => {
         if (!user) {
-          return res.status(400).json({
+          return res.status(404).json({
             message: `${req.params.Username} was not found`,
           });
         } else {
@@ -41,7 +40,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   Users.findOne({Username: req.body.Username}).then((user) => {
     if (user) {
-      return res.status(400).send(req.body.Username + ' already exists');
+      return res.status(409).send(req.body.Username + ' already exists');
     } else {
       Users.create({
         Username: req.body.Username,
@@ -92,7 +91,7 @@ router.delete('/:Username', (req, res) => {
   Users.findOneAndRemove({Username: req.params.Username})
       .then((user) => {
         if (!user) {
-          return res.status(400)
+          return res.status(404)
               .json({message: `${req.params.Username} was not found`});
         } else {
           return res.status(200)
@@ -109,7 +108,7 @@ router.post('/:Username/favorites/:MovieID', (req, res) => {
   {new: true})
       .then((updatedUser) => {
         if (!updatedUser) {
-          return res.status(400).json({
+          return res.status(409).json({
             message: 'Update was not successful',
           });
         } else {
@@ -129,7 +128,7 @@ router.delete('/:Username/favorites/:MovieID', (req, res) => {
   {new: true})
       .then((updatedUser) => {
         if (!updatedUser) {
-          return res.status(400).json({
+          return res.status(409).json({
             message: 'Update was not successful',
           });
         } else {
