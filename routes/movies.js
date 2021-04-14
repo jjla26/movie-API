@@ -1,10 +1,9 @@
 const express = require('express');
-// eslint-disable-next-line
-const router = express.Router();
-// const movies = require('../data/movies');
 const Models = require('../models/movies');
 const passport = require('passport');
 
+// eslint-disable-next-line
+const router = express.Router();
 const Movies = Models.Movie;
 
 // Route for movies pathname returns movies data
@@ -26,7 +25,7 @@ router.get('/:Title', passport.authenticate('jwt', {session: false}),
       Movies.findOne({Title: req.params.Title})
           .then((movie) => {
             if (!movie) {
-              return res.status(400).json({
+              return res.status(404).json({
                 message: `${req.params.Title} was not found`,
               });
             } else {
@@ -46,7 +45,7 @@ router.get('/:Name/genre', passport.authenticate('jwt', {session: false}),
       Movies.findOne({'Genre.Name': req.params.Name})
           .then((movie) => {
             if (!movie) {
-              return res.status(400).json({
+              return res.status(404).json({
                 message: `${req.params.Name} was not found`,
               });
             } else {
@@ -66,7 +65,7 @@ router.get('/:Name/director', passport.authenticate('jwt', {session: false}),
       Movies.findOne({'Director.Name': req.params.Name})
           .then((movie) => {
             if (!movie) {
-              return res.status(400).json({
+              return res.status(404).json({
                 message: `${req.params.Name} was not found`,
               });
             } else {
