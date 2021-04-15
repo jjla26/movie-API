@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
         res.send(error);
       }
       const token = generateJWTToken(user.toJSON());
-      return res.json({user, token});
+      return res.json({data: user, token, message: 'Logged in successfully'});
     });
   })(req, res);
 });
