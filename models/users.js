@@ -14,6 +14,13 @@ userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };
 
+// method to delete password from the response
+userSchema.methods.toJSON = function() {
+  const obj = this.toObject();
+  delete obj.Password;
+  return obj;
+};
+
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.Password);
 };
