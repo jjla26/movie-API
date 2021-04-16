@@ -1,6 +1,7 @@
 const express = require('express');
 const Models = require('../models/users');
 const passport = require('passport');
+const {check, validationResult} = require('express-validator');
 
 // eslint-disable-next-line
 const router = express.Router();
@@ -40,28 +41,40 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 });
 
 // Route to create an user
-router.post('/', (req, res) => {
-  const hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({Username: req.body.Username}).then((user) => {
-    if (user) {
-      return res.status(409).send(req.body.Username + ' already exists');
-    } else {
-      Users.create({
-        Username: req.body.Username,
-        Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday,
-      })
-          .then((user) => res.status(201).json({
-            data: user,
-            message: 'User has been created',
-          }))
-          .catch((error) => {
-            res.status(400).json(error);
-          });
-    }
-  });
-});
+router.post('/',
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters.')
+        .isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+    (req, res) => {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()});
+      }
+      const hashedPassword = Users.hashPassword(req.body.Password);
+      Users.findOne({Username: req.body.Username}).then((user) => {
+        if (user) {
+          return res.status(409).send(req.body.Username + ' already exists');
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
+          })
+              .then((user) => res.status(201).json({
+                data: user,
+                message: 'User has been created',
+              }))
+              .catch((error) => {
+                res.status(400).json(error);
+              });
+        }
+      });
+    },
+);
 
 // Route to edit an user
 router.put('/:Username', passport.authenticate('jwt', {session: false}),
