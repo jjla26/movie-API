@@ -29,6 +29,9 @@
 8. Allow users to remove a movie from their list of favorites
 9. Allow existing users to deregister
 
+## Authentication and Authorization
+
+###### After creating an user you will have to log in with the API to be able to make resquests. When logging in the authorization token will be returned in the response. That will be the authorization token (Bearer Token) that you will have to use in every request to interact with the API.
 
 ## API ENDPOINTS 
 
