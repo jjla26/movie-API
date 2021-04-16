@@ -9,9 +9,11 @@ const auth = require('./routes/auth');
 const cors = require('cors');
 require('./auth/passport');
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-
 dotenv.config();
+
+mongoose.connect(process.env.CONNECTION_URI,
+    {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
 const allowedOrigins = ['http://localhost:3000'];
 
 const app = express();
