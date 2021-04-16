@@ -78,12 +78,22 @@ router.post('/',
 
 // Route to edit an user
 router.put('/:Username', passport.authenticate('jwt', {session: false}),
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters.')
+        .isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
     (req, res) => {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()});
+      };
+      const hashedPassword = Users.hashPassword(req.body.Password);
       Users.findOneAndUpdate({Username: req.params.Username}, {
         $set:
           {
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
           },
@@ -91,7 +101,7 @@ router.put('/:Username', passport.authenticate('jwt', {session: false}),
       {new: true})
           .then((updatedUser) => {
             if (!updatedUser) {
-              return res.status(400).json({
+              return res.status(409).json({
                 message: 'Update was not successful',
               });
             } else {
