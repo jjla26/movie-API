@@ -56,7 +56,8 @@ router.post('/',
       const hashedPassword = Users.hashPassword(req.body.Password);
       Users.findOne({Username: req.body.Username}).then((user) => {
         if (user) {
-          return res.status(409).send(req.body.Username + ' already exists');
+          return res.status(409).json({
+            message: req.body.Username + ' already exists'});
         } else {
           Users.create({
             Username: req.body.Username,
