@@ -7,7 +7,7 @@ const router = express.Router();
 const Movies = Models.Movie;
 
 // Route for movies pathname returns movies data
-router.get('/', (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.find()
       .then((movies) => {
         return res.status(200).json({
