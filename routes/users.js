@@ -90,29 +90,36 @@ router.put('/:Username', passport.authenticate('jwt', {session: false}),
         return res.status(422).json({errors: errors.array()});
       };
       const hashedPassword = Users.hashPassword(req.body.Password);
-      Users.findOneAndUpdate({Username: req.params.Username}, {
-        $set:
-          {
-            Username: req.body.Username,
-            Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday,
+      Users.findOne({Username: req.body.Username}).then((user) => {
+        if (user && user.Username !== req.params.Username) {
+          return res.status(409).json({
+            message: req.body.Username + ' already exists'});
+        } else {
+          Users.findOneAndUpdate({Username: req.params.Username}, {
+            $set:
+              {
+                Username: req.body.Username,
+                Password: hashedPassword,
+                Email: req.body.Email,
+                Birthday: req.body.Birthday,
+              },
           },
-      },
-      {new: true})
-          .then((updatedUser) => {
-            if (!updatedUser) {
-              return res.status(409).json({
-                message: 'Update was not successful',
-              });
-            } else {
-              return res.status(200).json({
-                data: updatedUser,
-                message: 'User has been updated',
-              });
-            }
-          })
-          .catch((error) => res.status(400).json(error));
+          {new: true})
+              .then((updatedUser) => {
+                if (!updatedUser) {
+                  return res.status(409).json({
+                    message: 'Update was not successful',
+                  });
+                } else {
+                  return res.status(200).json({
+                    data: updatedUser,
+                    message: 'User has been updated',
+                  });
+                }
+              })
+              .catch((error) => res.status(400).json(error));
+        }
+      });
     },
 );
 
