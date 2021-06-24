@@ -19,7 +19,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:1234', 'https://myflixapp-client.netlify.app', 'https://jjla26.github.io/myFlixClient-Angular'];
+const allowedOrigins = ['http://localhost:1234', 'https://myflixapp-client.netlify.app', 'https://jjla26.github.io'];
 
 app.use(cors({
   origin: (origin, callback) => {
