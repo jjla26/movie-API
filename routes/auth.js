@@ -1,4 +1,7 @@
-
+/**
+ * Auth routes
+ * @module authroutes
+ */
 const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
@@ -14,6 +17,11 @@ const generateJWTToken = (user) => {
     algorithm: 'HS256', // This is the algorithm used to encode the JWT values
   });
 };
+
+/**
+ * Function that logs a user in
+ * @method login
+ */
 
 router.post('/', (req, res) => {
   passport.authenticate('local', {session: false}, (error, user, info) => {

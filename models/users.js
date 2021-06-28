@@ -1,3 +1,8 @@
+/**
+ * User model
+ * @module usersmodel
+ */
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
@@ -10,16 +15,29 @@ const userSchema = mongoose.Schema({
   FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}],
 });
 
+/**
+ * Function that encrypts password.
+ * @method encryptpassword
+ * @param {string} password.
+ * @return encrypted password.
+ */
+
 userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };
 
-// method to delete password from the response
 userSchema.methods.toJSON = function() {
   const obj = this.toObject();
   delete obj.Password;
   return obj;
 };
+
+/**
+ * Function that validates password
+ * @method validatepassword
+ * @param {string} password
+ * @return password
+ */
 
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.Password);
