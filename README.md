@@ -13,9 +13,9 @@
 ##### Using a Local MongoDB Server
 ###### If you don't have MongoDB installed, please click on this [link](https://www.mongodb.com/try/download/community) and follow the instructions for your Operating System.
 
-###### After MongoDB is installed, follow the instructions on the documentation to start the server. Then run the mongo shell from a separate terminal and execute the show dbs command. If all goes well you should see a list of available databases, similar to the sample below.
+###### After MongoDB is installed, follow the instructions on the documentation to start the server. Then run the mongo shell from a separate terminal and execute the show dbs command. If all goes well you should see a list of available databases.
 
-###### To either create a new database or switch to a different database, type: use [database name] in your terminal. In this case the name of the database is myFlixDB.
+###### To either create a new database or switch to a different database, type: use [database name] in your terminal. In this case the name of the database is myFlixDB. You need to create the users and the movies collection and populate your DB
 
 #### Essential Features of this APP
 
