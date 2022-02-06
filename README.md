@@ -53,4 +53,4 @@
 
 
 ## Want to experiment with this app?
-###### Clone this repository using: - git clone https://github.com/jjla26/Pokedex.git
+###### Clone this repository using: - git clone https://github.com/jjla26/movie-API.git and run npm install
